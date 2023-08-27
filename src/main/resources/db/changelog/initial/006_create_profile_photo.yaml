@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 006-create-profile-images-table
+      id: 007-create-profile-photo-table
       author: Sanat
       changes:
         - createTable:
-            tableName: profile_images
+            tableName: profile_photo
             columns:
               - column:
                   name: id
@@ -17,7 +17,7 @@ databaseChangeLog:
                   name: userId
                   type: int
                   constraints:
-                    foreignKeyName: fk-images-user-id
+                    foreignKeyName: fk-photo-user-id
                     nullable: false
                     references: users(id)
                     onDelete: CASCADE

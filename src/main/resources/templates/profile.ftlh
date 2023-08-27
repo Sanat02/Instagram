@@ -31,6 +31,10 @@
                 display: block;
             }
         }
+        .setPhoto{
+            margin-top: 5px;
+            margin-left: 46px;
+        }
 
     </style>
 
@@ -59,7 +63,12 @@
             <div class="md:w-3/12 md:ml-16">
                 <!-- profile image -->
                 <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
-                       border-2 border-pink-600 p-1" src="https://www.bytewebster.com/img/logo.png" alt="profile">
+                       border-2 border-pink-600 p-1" src="/posts/photo">
+                <div class="setPhoto">
+                <a href="/photo" class="bg-blue-500 px-2 py-1
+                          text-white font-semibold text-sm rounded block text-center
+                          sm:inline-block block">Set Photo</a>
+                </div>
             </div>
 
 
@@ -151,19 +160,6 @@
                     <a class="inline-block p-3" href="#">
                         <i class="fas fa-th-large text-xl md:text-xs"></i>
                         <span class="hidden md:inline">post</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="inline-block p-3" href="#">
-                        <i class="far fa-square text-xl md:text-xs"></i>
-                        <span class="hidden md:inline">igtv</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="inline-block p-3" href="#">
-                        <i class="fas fa-user border border-gray-500
-                               px-1 pt-1 rounded text-xl md:text-xs"></i>
-                        <span class="hidden md:inline">tagged</span>
                     </a>
                 </li>
             </ul>
