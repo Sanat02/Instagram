@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataAuthority
+      author: admin
+      changes:
+        - sql:
+            comment: Insert data into authority
+            sql: |
+              insert into authorities (authority)
+              values('FULL'), ('READ_ONLY');
+
+  - changeSet:
+      id: insertDataRoles
+      author: admin
+      changes:
+        - sql:
+            comment: Insert data into roles
+            sql: |
+              insert into roles(role, authority_id)
+              values ('USER', (select id from authorities where authority = 'FULL')),
+                ('ADMIN', (select id from authorities where authority = 'FULL'));
+
+  - changeSet:
+      id: insertDataUsers
+      author: admin
+      changes:
+        - sql:
+            sql: |
+              insert into users(email, full_name, account_name, password, enabled, role_id)
+              VALUES (
+                'qwe@qwe.qwe', 
+                'Alia Ro',
+                'alia_ro',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2', 
+                TRUE,
+                (select id from roles where role = 'USER')
+              ),
+              (
+                'ewq@ewq.com',
+                'Ewq User',
+                'ewq_user',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2',
+                TRUE,
+                (select id from roles where role = 'USER')
+              ),
+              (
+                'victoria.hall@example.com', 
+                'Victoria Hall', 
+                'victoria_hall',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2', 
+                TRUE, 
+                (select id from roles where role = 'USER')
+              ),
+              (
+                'kianu.hall@example.com', 
+                'Kianu Hall', 
+                'kianu_hall',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2', 
+                TRUE, 
+                (select id from roles where role = 'USER')
+              );

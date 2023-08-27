@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-profile-images-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: profile_images
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-images-user-id
+                    nullable: false
+                    references: users(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
+              - column:
+                  name: fileName
+                  type: varchar(255)

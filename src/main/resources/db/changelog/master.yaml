@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/initial/002_create_authorities.yaml
+  - include:
+      file: db/changelog/initial/003_create_roles.yaml
+  - include:
+      file: db/changelog/initial/001_create_user_table.yaml
+  - include:
+      file: db/changelog/initial/004_insert_data_aur.yaml
+  - include:
+      file: db/changelog/initial/005_create_profile_images.yaml
