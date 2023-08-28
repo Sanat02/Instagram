@@ -31,9 +31,30 @@
                 display: block;
             }
         }
-        .setPhoto{
-            margin-top: 5px;
-            margin-left: 46px;
+
+        .download-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .unfollow {
+            border: 1px solid black;
+            display: inline-block;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+
+
         }
 
     </style>
@@ -46,11 +67,20 @@
         <img class="h-10"
              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png"
              alt="instagram">
-
-        <div class="space-x-4">
-            <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
+        <#if user??>
+            <div class="space-x-4">
+                <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
                              text-sm rounded" href="/logout">Log out</a>
-        </div>
+            </div>
+        <#else>
+            <div class="space-x-4">
+                <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
+                             text-sm rounded" href="/login">Sign in</a>
+
+                <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
+                             text-sm rounded" href="/register">Sign up</a>
+            </div>
+        </#if>
     </div>
 </nav>
 
@@ -81,11 +111,17 @@
             </span>
 
                     <!-- edit button -->
-
-                    <a href="#" class="bg-blue-500 px-2 py-1
-                          text-white font-semibold text-sm rounded block text-center
-                          sm:inline-block block">Follow</a>
-
+                    <#if user??>
+                        <#if isFollower>
+                            <button type="button" id="un"
+                                    class="unfollow">Unfollow
+                            </button>
+                        <#else>
+                            <button type="button" id="followBtn"
+                                    class="delete-btn download-btn">Follow
+                            </button>
+                        </#if>
+                    </#if>
                 </div>
 
                 <!-- post, following, followers list for medium screens -->
@@ -171,7 +207,8 @@
                         <a href="#">
                             <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
                                 <!-- post images-->
-                                <img id="im" class="w-full h-full absolute left-0 top-0 object-cover" src="/posts/${image.id}/${account.id}"
+                                <img id="im" class="w-full h-full absolute left-0 top-0 object-cover"
+                                     src="/posts/${image.id}/${account.id}"
                                      alt="image">
 
                                 <i class="fas fa-square absolute right-0 top-0 m-1"></i>
@@ -227,5 +264,52 @@
     </ul>
 
 </nav>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const followButton = document.getElementById('followBtn');
+        const unfollowButton = document.getElementById('un')
+
+        if (followButton) {
+            followButton.addEventListener("click", function () {
+
+                fetch(`/follow/` + ${account.id}, {
+                    method: 'GET'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            console.error('Error following:', response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error following:', error);
+                    });
+
+            });
+        }
+
+        if (unfollowButton) {
+            unfollowButton.addEventListener("click", function () {
+                console.log("unfollow button is clicked!")
+                fetch(`/follow/` + ${account.id}, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            console.error('Error unfollowing', response.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error unfollowing:', error);
+                    });
+
+            });
+        }
+    });
+
+</script>
 </body>
 </html>

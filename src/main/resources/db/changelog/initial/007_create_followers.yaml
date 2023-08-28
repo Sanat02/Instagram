@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-followers-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: followers
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-user-id-f
+                    nullable: false
+                    references: users(id)
+              - column:
+                  name: followerId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-follower-id-f
+                    nullable: false
+                    references: users(id)
+
