@@ -60,13 +60,18 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/users")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/users")
                         .permitAll())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/login")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/users/***")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/posts/{imageId}/{userId}")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/posts/photo/{userId}")).permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

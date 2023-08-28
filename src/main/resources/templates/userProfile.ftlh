@@ -63,12 +63,7 @@
             <div class="md:w-3/12 md:ml-16">
                 <!-- profile image -->
                 <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
-                       border-2 border-pink-600 p-1" src="/posts/photo">
-                <div class="setPhoto">
-                <a href="/photo" class="bg-blue-500 px-2 py-1
-                          text-white font-semibold text-sm rounded block text-center
-                          sm:inline-block block">Set Photo</a>
-                </div>
+                       border-2 border-pink-600 p-1" src="/posts/photo/${account.id}">
             </div>
 
 
@@ -86,9 +81,11 @@
             </span>
 
                     <!-- edit button -->
+
                     <a href="#" class="bg-blue-500 px-2 py-1
                           text-white font-semibold text-sm rounded block text-center
-                          sm:inline-block block">Edit</a>
+                          sm:inline-block block">Follow</a>
+
                 </div>
 
                 <!-- post, following, followers list for medium screens -->
@@ -169,35 +166,35 @@
 
                 <!-- column -->
                 <#list account.images as image>
-                                    <div class="w-1/3 p-px md:px-3">
-                                        <!-- post 1-->
-                                        <a href="#">
-                                            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-                                                <!-- post images-->
-                                                <img id="im" class="w-full h-full absolute left-0 top-0 object-cover" src="/posts/${image.id}"
-                                                     alt="image">
+                    <div class="w-1/3 p-px md:px-3">
+                        <!-- post 1-->
+                        <a href="#">
+                            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
+                                <!-- post images-->
+                                <img id="im" class="w-full h-full absolute left-0 top-0 object-cover" src="/posts/${image.id}/${account.id}"
+                                     alt="image">
 
-                                                <i class="fas fa-square absolute right-0 top-0 m-1"></i>
-                                                <!-- overlay-->
-                                                <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute
+                                <i class="fas fa-square absolute right-0 top-0 m-1"></i>
+                                <!-- overlay-->
+                                <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute
                                                   left-0 top-0 hidden">
-                                                    <div class="flex justify-center items-center
+                                    <div class="flex justify-center items-center
                                                       space-x-4 h-full">
                                     <span class="p-2">
                                       <i class="fas fa-heart"></i>
                                       412K
                                     </span>
 
-                                                        <span class="p-2">
+                                        <span class="p-2">
                                       <i class="fas fa-comment"></i>
                                       2,909
                                     </span>
-                                                    </div>
-                                                </div>
-
-                                            </article>
-                                        </a>
                                     </div>
+                                </div>
+
+                            </article>
+                        </a>
+                    </div>
                 </#list>
 
             </div>

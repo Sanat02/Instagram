@@ -31,7 +31,11 @@ public class ProfilePhotoService {
 
     public ResponseEntity<?> getImageByUsId(int userId) {
         ProfileImage image = profilePhotoDao.getImageByUserId(userId);
-        return fileService.getOutputFile(image.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
+        if (image != null) {
+            return fileService.getOutputFile(image.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
+        }else{
+            return null;
+        }
     }
 
     public ProfileImageDto getImageByUserId(int userId) {
@@ -47,7 +51,7 @@ public class ProfilePhotoService {
         }
     }
 
-    public void deletePhoto(int userId){
+    public void deletePhoto(int userId) {
         profilePhotoDao.delete(userId);
     }
 }
