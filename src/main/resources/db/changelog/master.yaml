@@ -13,3 +13,7 @@ databaseChangeLog:
       file: db/changelog/initial/006_create_profile_photo.yaml
   - include:
       file: db/changelog/initial/007_create_followers.yaml
+  - include:
+      file: db/changelog/initial/008_add_colum_images.yaml
+  - include:
+      file: db/changelog/initial/009_create_likes.yaml

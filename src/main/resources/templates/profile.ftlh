@@ -208,7 +208,7 @@
 <nav class="bg-white border-t fixed bottom-0 w-full">
     <ul class="flex justify-around py-2">
         <li class="flex-1 text-center">
-            <a href="#" class="text-gray-600 hover:text-blue-500">
+            <a href="/" class="text-gray-600 hover:text-blue-500">
                 <i class="fas fa-home text-xl"></i>
             </a>
         </li>

@@ -67,6 +67,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/users")
                         .permitAll())
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/login")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/users/***")).permitAll()

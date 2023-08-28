@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-add-likes-column-to-profile-images
+      author: Sanat
+      changes:
+        - addColumn:
+            tableName: profile_images
+            columns:
+              - column:
+                  name: likes
+                  type: int
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false

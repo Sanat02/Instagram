@@ -51,14 +51,28 @@ public class ProfileImageService {
                 .map(e -> ProfileImageDto.builder()
                         .id(e.getId())
                         .fileName(e.getFileName())
+                        .likes(e.getLikes())
                         .userId(e.getUserId())
                         .build()
                 ).collect(Collectors.toList());
         return profileImageDtos;
     }
 
-    public ResponseEntity<?> getImageByUsId(int imageId,int userId) {
-        ProfileImage image = profileImageDao.getImageByUserIdAndId(imageId,userId);
-            return fileService.getOutputFile(image.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
+    public ResponseEntity<?> getImageByUsId(int imageId, int userId) {
+        ProfileImage image = profileImageDao.getImageByUserIdAndId(imageId, userId);
+        return fileService.getOutputFile(image.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
+    }
+
+    public void updateLikes(int imageId) {
+        profileImageDao.update(imageId);
+    }
+
+    public ProfileImageDto getImageById(int imageId) {
+        ProfileImage images = profileImageDao.getImageById(imageId);
+        return ProfileImageDto.builder()
+                .id(imageId)
+                .fileName(images.getFileName())
+                .likes(images.getLikes())
+                .build();
     }
 }

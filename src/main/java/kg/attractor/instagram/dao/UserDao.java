@@ -113,11 +113,6 @@ public class UserDao extends BaseDao {
 
     @Override
     public void update(Object obj) {
-//        User user = (User) obj;
-//        String sql = "UPDATE users SET account_name = ? , email = ?, " +
-//                " account_type = ?, password = ? , phone_number = ? WHERE id = ?";
-//
-//        jdbcTemplate.update(sql, user.getAccountName(), user.getEmail(), String.valueOf(AccountType.EMPLOYER),
-//                user.getPassword(), user.getPhoneNumber(), user.getId());
+
     }
 }

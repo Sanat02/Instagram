@@ -14,4 +14,6 @@ public class ProfileImageDto {
 
     @Pattern(regexp = "^[0-9]+$", message = "User id should contain only numbers!")
     private int userId;
+    private int likes;
+    private boolean isLiked;
 }

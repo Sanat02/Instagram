@@ -27,12 +27,18 @@ public class ProfileImageDao {
         return DataAccessUtils.singleResult(jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProfileImage.class), imageId));
     }
 
-    public ProfileImage getImageByUserIdAndId(int imageId,int userId) {
+    public ProfileImage getImageByUserIdAndId(int imageId, int userId) {
         String sql = "select * from profile_images where userId = ? and id=?";
-        return DataAccessUtils.singleResult(jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProfileImage.class), userId,imageId));
+        return DataAccessUtils.singleResult(jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProfileImage.class), userId, imageId));
     }
+
     public List<ProfileImage> getImageByUserId(int userId) {
         String sql = "select * from profile_images where userId = ? ";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProfileImage.class), userId);
+    }
+
+    public void update(int imageId) {
+        String sql = "UPDATE profile_images SET likes WHERE id = ?";
+        jdbcTemplate.update(sql, imageId);
     }
 }

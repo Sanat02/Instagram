@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-create-likes-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: likes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: imageId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-likes-image-id-
+                    nullable: false
+                    references: profile_images(id)
+              - column:
+                  name: userId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-likes-userId
+                    nullable: false
+                    references: users(id)
+

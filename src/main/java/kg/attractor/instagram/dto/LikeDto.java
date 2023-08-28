@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Builder
 @Data
-public class FollowerDto {
+public class LikeDto {
     private int id;
-    private  UserDto user;
-    private UserDto follower;
+    private UserDto user;
+    private ProfileImageDto profileImage;
 }

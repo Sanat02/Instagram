@@ -1,6 +1,7 @@
 package kg.attractor.instagram.service;
 
 import kg.attractor.instagram.dao.UserDao;
+import kg.attractor.instagram.dto.FollowerDto;
 import kg.attractor.instagram.dto.UserDto;
 import kg.attractor.instagram.model.User;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ public class UserService {
     private final UserDao userDao;
     private final PasswordEncoder encoder;
     private final ProfileImageService profileImageService;
+
 
 
     public List<UserDto> getAllUsers() {
@@ -97,6 +100,7 @@ public class UserService {
 
     public UserDto mapToUserDto(User user) {
         if (user != null) {
+            List<UserDto> userDtos=new ArrayList<>();
             return UserDto.builder()
                     .id(user.getId())
                     .accountName(user.getAccountName())

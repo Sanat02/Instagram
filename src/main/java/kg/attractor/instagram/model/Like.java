@@ -6,10 +6,8 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class ProfileImage {
+public class Like {
     private int id;
     private int userId;
-    private String fileName;
-    private int likes;
-
+    private int imageId;
 }

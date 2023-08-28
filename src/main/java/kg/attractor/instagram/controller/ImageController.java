@@ -39,10 +39,21 @@ public class ImageController {
 
     @GetMapping("/{imageId}")
     public ResponseEntity<?> getImages(@PathVariable int imageId) {
-        System.out.println("IMAGE ID:" + imageId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return profileImageService.getImageByUsId(imageId, userService.mapToUserDto(userService.getUserByEmail(auth.getName()).get()).getId());
     }
+
+//    @PutMapping("/plus/{imageId}")
+//    public void addLikes(@PathVariable int imageId) {
+//        int likes = profileImageService.getImageById(imageId).getLikes() + 1;
+//        profileImageService.updateLikes(likes);
+//    }
+//
+//    @PutMapping("/minus/{imageId}")
+//    public void subLikes(@PathVariable int imageId) {
+//        int likes = profileImageService.getImageById(imageId).getLikes() - 1;
+//        profileImageService.updateLikes(likes);
+//    }
 
     @GetMapping("/{imageId}/{userId}")
     public ResponseEntity<?> getImagesByUserId(@PathVariable int imageId, @PathVariable int userId) {
