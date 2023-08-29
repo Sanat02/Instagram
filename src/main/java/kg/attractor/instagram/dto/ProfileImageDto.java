@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Builder
 @Data
 public class ProfileImageDto {
@@ -16,4 +18,5 @@ public class ProfileImageDto {
     private int userId;
     private int likes;
     private boolean isLiked;
+
 }

@@ -13,5 +13,6 @@ public class CommentDto {
     private int followerId;
     private int imageId;
     private String comment;
+    private String senderName;
     private LocalDate commentDate;
 }

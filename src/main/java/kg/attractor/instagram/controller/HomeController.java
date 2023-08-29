@@ -2,6 +2,7 @@ package kg.attractor.instagram.controller;
 
 import kg.attractor.instagram.dto.FollowerDto;
 import kg.attractor.instagram.dto.UserDto;
+import kg.attractor.instagram.service.CommentService;
 import kg.attractor.instagram.service.FollowerService;
 import kg.attractor.instagram.service.LikeService;
 import kg.attractor.instagram.service.UserService;
@@ -25,6 +26,7 @@ public class HomeController {
     private final UserService userService;
     private final FollowerService followerService;
     private final LikeService likeService;
+
 
     @GetMapping
     public String register(Model model) {

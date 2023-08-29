@@ -1,11 +1,13 @@
 package kg.attractor.instagram.dao;
 
 import kg.attractor.instagram.model.Comment;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -30,6 +32,11 @@ public class CommentDao extends BaseDao {
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
 
+    }
+
+    public List<Comment> getCommentsByImageId(int imageId) {
+        String sql = "SELECT * FROM comments WHERE imageId=?";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Comment.class),imageId);
     }
 
     @Override

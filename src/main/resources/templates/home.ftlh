@@ -276,7 +276,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-height: 400px;
+            max-height: 100px;
             overflow-y: auto;
         }
 
@@ -333,7 +333,7 @@
 
         <#if account??>
             <div class="space-x-4">
-                <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
+                <a id="logout" class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
                              text-sm rounded" href="/logout">Log out</a>
             </div>
         <#else>
@@ -403,6 +403,10 @@
                                     elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo
                                     natus
                                     molestias?</p>
+                            </div>
+
+                            <div id="chat" class="chat" data-imageid="${image.id}">
+
                             </div>
 
                             <div class="comment-wrapper">
@@ -502,22 +506,34 @@
         }
         const baseUrl = 'http://localhost:8087/comment';
         const chatForms = document.querySelectorAll('#chat_form');
+        const storedUser = readUser();
+
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password)
+        });
+
+        async function getMessages() {
+            let response = await fetch(
+                baseUrl,
+                {
+                    method: 'GET',
+                    headers: headers
+                }
+            )
+            return await response.json()
+        }
+
 
         if (chatForms) {
             chatForms.forEach(function (chatForm) {
                 chatForm.addEventListener("submit", function (event) {
+
                     event.preventDefault();
 
                     const followerId = chatForm.querySelector('input[name="followerId"]').value;
                     const imageId = chatForm.querySelector('input[name="imageId"]').value;
                     const messageInput = chatForm.querySelector('#message' + imageId);
-
-                    const storedUser = readUser();
-
-                    const headers = new Headers({
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password)
-                    });
 
                     const message = messageInput.value.trim();
 
@@ -548,7 +564,11 @@
 
                     // Clear the message input
                     messageInput.value = '';
+
+
                 });
+
+
             });
         }
 
@@ -557,6 +577,64 @@
             let user = JSON.parse(userAsJson);
             return user;
         }
+
+        const chatContainers = document.querySelectorAll('.chat');
+        chatContainers.forEach(function (chatContainer) {
+            const imageId = chatContainer.getAttribute('data-imageid');
+
+            window.addEventListener('load', async () => {
+                setInterval(async () => {
+
+                    const response = await getMessages();
+                    const messages = JSON.parse(JSON.stringify(response));
+
+
+                    chatContainer.innerHTML = '';
+
+                    for (let messageElement of messages) {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'message';
+
+                        const senderP = document.createElement('p');
+                        senderP.className = 'sender';
+                        senderP.textContent = messageElement.senderName;
+                        messageDiv.appendChild(senderP);
+
+                        const textP = document.createElement('p');
+                        textP.textContent = messageElement.comment;
+                        messageDiv.appendChild(textP);
+
+                        const dateP = document.createElement('p');
+                        dateP.className = 'date';
+                        dateP.textContent = messageElement.timestamp;
+                        messageDiv.appendChild(dateP);
+
+                        chatContainer.appendChild(messageDiv);
+
+                        const separatorDiv = document.createElement('div');
+                        separatorDiv.className = 'message-separator';
+                        chatContainer.appendChild(separatorDiv);
+                    }
+                }, 5000);
+            });
+
+            async function getMessages() {
+                let response = await fetch(
+                    baseUrl + "/" + imageId,
+                    {
+                        method: 'GET',
+                        headers: headers
+                    }
+                )
+                return await response.json()
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('user')
+        })
+
+
     })
 </script>
 </body>
