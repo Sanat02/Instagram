@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Profile</title>
+    <title>User profile</title>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css'>
@@ -294,7 +294,7 @@
              alt="instagram">
         <#if account??>
             <div class="space-x-4">
-                <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
+                <a id="logout" class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold
                              text-sm rounded" href="/logout">Log out</a>
             </div>
         <#else>
@@ -378,5 +378,10 @@
     </ul>
 
 </nav>
+<script>
+    document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('user')
+    })
+</script>
 </body>
 </html>

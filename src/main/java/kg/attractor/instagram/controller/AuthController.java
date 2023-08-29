@@ -1,7 +1,6 @@
 package kg.attractor.instagram.controller;
 
 
-
 import kg.attractor.instagram.dto.UserDto;
 import kg.attractor.instagram.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("hello","hi");
+        model.addAttribute("hello", "hi");
         return "registration";
     }
 
@@ -50,7 +49,7 @@ public class AuthController {
                     .email(email)
                     .build();
 
-            int userId = userService.save(userDto);
+            userService.save(userDto);
             return "redirect:/login";
         }
     }

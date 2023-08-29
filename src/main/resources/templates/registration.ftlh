@@ -71,10 +71,10 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWo4v-BaVbLHGYKpGxNQBjiOQpqrJmTAgvLA&usqp=CAU">
     </div>
     <form action="/register" method="post">
-        <input type="text" placeholder="Email" name="email">
-        <input type="text" placeholder="Full Name" name="full_name">
-        <input type="text" placeholder="Username" name="account_name">
-        <input type="password" placeholder="Password" name="password">
+        <input type="text" placeholder="Email" name="email" required>
+        <input type="text" placeholder="Full Name" name="full_name" required>
+        <input type="text" placeholder="Username" name="account_name" required>
+        <input type="password" placeholder="Password" name="password" required>
         <button type="submit">Sign Up</button>
     </form>
     <p>By signing up, you agree to our Terms, Data Policy, and Cookies Policy.</p>

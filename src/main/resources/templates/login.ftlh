@@ -71,8 +71,8 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWo4v-BaVbLHGYKpGxNQBjiOQpqrJmTAgvLA&usqp=CAU">
     </div>
     <form action="/login" method="post" id="login-form">
-        <input type="text" id="email" placeholder="Email" name="username">
-        <input type="password" id="password" placeholder="Password" name="password">
+        <input type="text" id="email" placeholder="Email" name="username" required>
+        <input type="password" id="password" placeholder="Password" name="password" required>
         <button type="submit">Login</button>
     </form>
     <div class="form-switch">

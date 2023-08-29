@@ -19,12 +19,13 @@ public class CommentController {
     private final UserService userService;
 
     @PostMapping()
-    public HttpStatus addMessage(@RequestBody CommentDto commentDto, Authentication auth) {
+    public HttpStatus addComment(@RequestBody CommentDto commentDto, Authentication auth) {
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         commentDto.setUserId(userDto.getId());
         commentService.saveComment(commentDto);
         return HttpStatus.OK;
     }
+
     @GetMapping("/{imageId}")
     public List<CommentDto> getCommentsByImageId(@PathVariable int imageId, Authentication auth) {
         return commentService.getCommentsByImageId(imageId);

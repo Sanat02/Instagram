@@ -39,7 +39,7 @@ public class FileService {
         }
         try (OutputStream os = Files.newOutputStream(filePath)) {
             os.write(file.getBytes());
-        }catch(IOException e){
+        } catch (IOException e) {
             log.error(e.getMessage());
         }
         return resultFileName;

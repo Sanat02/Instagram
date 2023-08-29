@@ -76,12 +76,12 @@
             color: #6c757d;
         }
     </style>
-    <title>Profile Job Seeker</title>
+    <title>Set images</title>
 </head>
 <body>
 
 <form action="/images" method="post" enctype="multipart/form-data">
-    <input type="file" name="files" multiple>
+    <input type="file" name="files" multiple required>
     <br><br>
     <input type="submit" value="Upload">
 </form>

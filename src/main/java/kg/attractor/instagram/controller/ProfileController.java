@@ -20,7 +20,7 @@ public class ProfileController {
     private final UserService userService;
 
     @GetMapping("/profile")
-    public String register(Model model) {
+    public String getProfile(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         model.addAttribute("account",userDto);

@@ -1,7 +1,6 @@
 package kg.attractor.instagram.controller;
 
 import kg.attractor.instagram.dto.ProfileImageDto;
-import kg.attractor.instagram.model.ProfileImage;
 import kg.attractor.instagram.service.ProfilePhotoService;
 import kg.attractor.instagram.service.UserService;
 import lombok.RequiredArgsConstructor;

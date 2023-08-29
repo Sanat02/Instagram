@@ -1,6 +1,6 @@
 package kg.attractor.instagram.controller;
 
-import kg.attractor.instagram.dto.FollowerDto;
+
 import kg.attractor.instagram.dto.LikeDto;
 import kg.attractor.instagram.dto.UserDto;
 import kg.attractor.instagram.service.LikeService;
@@ -29,11 +29,12 @@ public class LikeController {
                 .profileImage(profileImageService.getImageById(imageId))
                 .build());
     }
+
     @DeleteMapping("/{imageId}")
     public void unLike(@PathVariable int imageId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
-        likeService.unLike(imageId,userDto.getId());
+        likeService.unLike(imageId, userDto.getId());
     }
 
 }

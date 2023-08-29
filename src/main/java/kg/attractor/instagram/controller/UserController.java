@@ -39,7 +39,7 @@ public class UserController {
         model.addAttribute("user", userDto);
 
         if (userDto != null) {
-           model.addAttribute("isFollower",followerService.isFollow(userDto.getId(),followerDto.getId()));
+            model.addAttribute("isFollower", followerService.isFollow(userDto.getId(), followerDto.getId()));
         }
         return "userProfile";
     }

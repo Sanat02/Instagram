@@ -2,7 +2,6 @@ package kg.attractor.instagram.controller;
 
 import kg.attractor.instagram.dto.FollowerDto;
 import kg.attractor.instagram.dto.UserDto;
-import kg.attractor.instagram.service.CommentService;
 import kg.attractor.instagram.service.FollowerService;
 import kg.attractor.instagram.service.LikeService;
 import kg.attractor.instagram.service.UserService;
@@ -29,7 +28,7 @@ public class HomeController {
 
 
     @GetMapping
-    public String register(Model model) {
+    public String getHomePage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         if (userDto != null) {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Profile</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css'>
@@ -164,10 +164,10 @@
 
         .main {
             width: 100%;
-            padding: 100px 0;
+            padding: 70px 0;
             display: flex;
             justify-content: center;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         .wrapper {
@@ -353,18 +353,12 @@
         <div class="wrapper">
             <div class="left-col">
                 <div class="status-wrapper">
-                    <div class="status-card">
-                        <div class="profile-pic"><img src="img/cover 1.png" alt=""></div>
-                        <p class="username">user_name_1</p>
-                    </div>
-                    <div class="status-card">
-                        <div class="profile-pic"><img src="img/cover 2.png" alt=""></div>
-                        <p class="username">user_name_2</p>
-                    </div>
-                    <div class="status-card">
-                        <div class="profile-pic"><img src="img/cover 3.png" alt=""></div>
-                        <p class="username">user_name_3</p>
-                    </div>
+                    <#list followers as follower>
+                        <div class="status-card">
+                            <div class="profile-pic"><img src="img/cover 1.png" alt=""></div>
+                            <p class="username">${follower.user.accountName}</p>
+                        </div>
+                    </#list>
                 </div>
 
                 <#list followers as follower>
