@@ -17,3 +17,5 @@ databaseChangeLog:
       file: db/changelog/initial/008_add_colum_images.yaml
   - include:
       file: db/changelog/initial/009_create_likes.yaml
+  - include:
+      file: db/changelog/initial/010_create_comments.yaml

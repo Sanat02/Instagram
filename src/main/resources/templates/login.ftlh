@@ -70,14 +70,32 @@
     <div class="logo">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWo4v-BaVbLHGYKpGxNQBjiOQpqrJmTAgvLA&usqp=CAU">
     </div>
-    <form action="/login" method="post">
-        <input type="text" placeholder="Email" name="username">
-        <input type="password" placeholder="Password" name="password">
+    <form action="/login" method="post" id="login-form">
+        <input type="text" id="email" placeholder="Email" name="username">
+        <input type="password" id="password" placeholder="Password" name="password">
         <button type="submit">Login</button>
     </form>
     <div class="form-switch">
         <p>Do you have an account? <a href="/register">Sign up</a></p>
     </div>
 </div>
+<script>
+    document.getElementById("login-form").addEventListener('submit', onLoginHandler);
+
+    let user = {};
+
+    function onLoginHandler(event) {
+
+        let form = event.target;
+        let userFormData = new FormData(form);
+        user = Object.fromEntries(userFormData);
+        saveUser(user)
+    }
+
+    function saveUser(user) {
+        let userAsJson = JSON.stringify(user)
+        localStorage.setItem('user', userAsJson)
+    }
+</script>
 </body>
 </html>

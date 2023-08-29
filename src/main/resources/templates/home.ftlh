@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
+
         .pb-full {
             padding-bottom: 100%;
         }
@@ -119,7 +120,7 @@
         }
 
         .comment-wrapper .icon {
-            height: 30px;
+            height: 60px;
         }
 
         .comment-box {
@@ -163,7 +164,7 @@
 
         .main {
             width: 100%;
-            padding: 40px 0;
+            padding: 100px 0;
             display: flex;
             justify-content: center;
             margin-top: 50px;
@@ -264,6 +265,61 @@
             color: #e2dbdb;;
         }
 
+        .chat-container {
+            flex: 1;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .chat {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .message .sender {
+            font-weight: bold;
+            color: greenyellow;
+        }
+
+        .message .date {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-top: 20px;
+        }
+
+        .input-group input {
+            width: 80%;
+            border-radius: 4px;
+            padding: 8px;
+        }
+
+        .input-group button {
+            width: 20%;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .message-separator {
+            width: 100%;
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+
 
     </style>
 </head>
@@ -350,9 +406,12 @@
                             </div>
 
                             <div class="comment-wrapper">
-                                <img src="img/smile.PNG" class="icon" alt="">
-                                <input type="text" class="comment-box" placeholder="Add a comment">
-                                <button class="comment-btn">post</button>
+                                <form id="chat_form">
+                                    <input type="hidden" name="followerId" value="${follower.user.id}">
+                                    <input type="hidden" name="imageId" value="${image.id}">
+                                    <input id="message${image.id}" type="text" placeholder="Type a message" required>
+                                    <input type="submit" value="Submit">
+                                </form>
                             </div>
                         </div>
 
@@ -440,6 +499,63 @@
 
                 });
             });
+        }
+        const baseUrl = 'http://localhost:8087/comment';
+        const chatForms = document.querySelectorAll('#chat_form');
+
+        if (chatForms) {
+            chatForms.forEach(function (chatForm) {
+                chatForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    const followerId = chatForm.querySelector('input[name="followerId"]').value;
+                    const imageId = chatForm.querySelector('input[name="imageId"]').value;
+                    const messageInput = chatForm.querySelector('#message' + imageId);
+
+                    const storedUser = readUser();
+
+                    const headers = new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password)
+                    });
+
+                    const message = messageInput.value.trim();
+
+                    if (message === '') {
+                        return;
+                    }
+
+                    const formData = new FormData(chatForm);
+                    formData.append('followerId', followerId);
+                    formData.append('imageId', imageId);
+                    formData.append('comment', message);
+
+                    const formDataObject = {};
+                    formData.forEach((value, key) => {
+                        formDataObject[key] = value;
+                    });
+
+                    const json = JSON.stringify(formDataObject);
+
+                    fetch(
+                        baseUrl,
+                        {
+                            method: 'POST',
+                            body: json,
+                            headers: headers
+                        }
+                    );
+
+                    // Clear the message input
+                    messageInput.value = '';
+                });
+            });
+        }
+
+        function readUser() {
+            let userAsJson = localStorage.getItem('user');
+            let user = JSON.parse(userAsJson);
+            return user;
         }
     })
 </script>

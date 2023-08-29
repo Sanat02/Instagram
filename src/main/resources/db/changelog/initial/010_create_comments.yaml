@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-create-comments-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: comments
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_comment_user_id
+                    nullable: false
+                    references: users(id)
+              - column:
+                  name: followerId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_comment_follower_id
+                    nullable: false
+                    references: users(id)
+              - column:
+                  name: imageId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_comment_image_id
+                    nullable: false
+                    references: profile_images(id)
+              - column:
+                  name: comment
+                  type: varchar(1000)
+              - column:
+                  name: commentDate
+                  type: date
